@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+
+type Props = {
+  images: { src?: string; caption?: string }[];
+};
+
+const { images } = Astro.props;
+---
+
+<div
+  class='max-w-5xl mx-auto mt-8 pb-10 text-center bg-gradient-to-r from-purple-50 to-indigo-200 rounded-xl'
+>
+  <h4
+    class='text-3xl w-full bg-gradient-to-l from-indigo-50 to-purple-200 py-4 rounded-t-xl'
+  >
+    Image Gallery
+  </h4>
+  <div
+    class='mt-8 flex flex-1 flex-wrap justify-around items-center gap-6 px-2'
+  >
+    {
+      images.map((image) => (
+        <div class='flex flex-col items-center justify-center'>
+          <div
+            class={`shadow-sm w-full object-cover hover:shadow-lg transition-shadow duration-200 p-2 rounded-lg bg-gray-100`}
+          >
+            <Image
+              src={image.src}
+              alt={image.caption}
+              width={250}
+              height={225}
+              class='rounded-lg'
+            />
+            <p class='mt-2 max-w-[245px] text-start text-ellipsis text-gray-700 text-sm italic'>
+              {image.caption}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+

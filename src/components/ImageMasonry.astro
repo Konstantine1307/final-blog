@@ -1,0 +1,17 @@
+---
+import { Image } from "astro:assets";
+
+
+type Props = {
+	src: any;
+	alt: string;
+	[key: string]: any;
+};
+
+const { src, alt, ...props } = Astro.props;
+---
+
+<div class="inline-flex w-full md:w-fit h-full prose pb-5 items-center justify-center self-center">
+    <Image src={src} alt={alt} {...props} transition:name={alt} transition:animate="initial"/>
+</div>
+ 

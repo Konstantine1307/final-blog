@@ -1,0 +1,9 @@
+---
+type props = {
+    caption: string;
+}
+
+const { caption, ...props } = Astro.props
+---
+
+<p {...props} class="text-gray-600 text-sm pl-2 italic -mt-8">{caption}</p>

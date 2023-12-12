@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from './Layout.astro';
+import PostTitle from '../components/PostTitle.astro';
+import HeroImage from '../components/HeroImage.astro';
+import PostHeadline from '../components/PostHeadline.astro';
+import Prose from '../components/Prose.astro';
+import Gallery from '../components/Gallery.astro';
+
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, galleryImages } =
+  Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <PostTitle>{title}</PostTitle>
+
+  {
+    heroImage && (
+      <HeroImage
+        class='mx-auto block rounded-lg shadow-md'
+        width={1536}
+        height={768}
+        src={heroImage}
+        alt={title}
+      />
+    )
+  }
+  <PostHeadline pubDate={pubDate} updatedDate={updatedDate} headline={description} />
+  
+
+  <hr />
+  
+    <Prose>
+      <slot />
+    </Prose>
+ 
+
+
+  <section class="gallery mt:12 md:mt-24">
+    {galleryImages && galleryImages.length > 0 && (
+      <Gallery images={galleryImages} />
+    )}
+  </section>
+</Layout>
+
+

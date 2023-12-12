@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+
+type Props = {
+  src: any;
+  alt: string;
+  caption: string;
+};
+
+const { src, alt, caption, ...props } = Astro.props;
+---
+
+<div class='grid grid-cols-1 md:grid-cols-2 gap-2 p-2 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl'>
+  <div>
+    <Image
+      src={src}
+      alt={alt}
+      {...props}
+      width={400}
+      height={300}
+      transition:name={alt}
+      transition:animate='initial'
+    />
+  </div>
+  <div class='box col-span-1 text-sm flex flex-col items-start justify-center' {...props}>
+    {caption}
+  </div>
+</div>
+
+
+<style>
+.box {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+</style>

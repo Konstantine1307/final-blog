@@ -3,14 +3,13 @@ import { Image } from 'astro:assets';
 
 type Props = {
   images: { src: string; caption: string }[];
-  [key: string]: any;
 };
 
-const { images, ...props } = Astro.props;
+const { images } = Astro.props;
 ---
 
 <div
-  class='max-w-5xl mx-auto mt-8 pb-10 text-center bg-gradient-to-r from-purple-50 to-indigo-200 rounded-xl' {...props}
+  class='max-w-5xl mx-auto mt-8 pb-10 text-center bg-gradient-to-r from-purple-50 to-indigo-200 rounded-xl' 
 >
   <h4
     class='text-3xl w-full bg-gradient-to-l from-indigo-50 to-purple-200 py-4 rounded-t-xl'

@@ -1,7 +1,20 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
+import { getCollection } from 'astro:content';
+import HeroImage from '../components/HeroImage.astro';
+import BlogHeader from '../components/BlogHeader.astro';
 
-import homeImage from '../content/assets/hero-images/lj-hollywood.webp'
+import homeImage from '../content/assets/hero-images/lj-hollywood.webp';
+
+type Props = {
+	name?: string;
+};
+
+const { name, ...props } = Astro.props;
+
+const sortedPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <Layout
@@ -10,34 +23,77 @@ import homeImage from '../content/assets/hero-images/lj-hollywood.webp'
   pubDate={new Date('December 05 2022')}
   heroImage={homeImage}
 >
+  <p class='mt-8'>
+    Welcome to the extraordinary journey of Leslie and Johnny, two passionate
+    wanderers with an insatiable appetite for exploration and a taste for the
+    extraordinary. As avid travelers, they have embarked on a global odyssey,
+    weaving through the vibrant tapestry of countries, cities, and cultures.
+    Their travel blog is not just a collection of destinations; it's a vivid
+    chronicle of experiences, a kaleidoscope of moments that have left an
+    indelible mark on their souls.
+  </p>
+  <p>
+    From the bustling markets of Marrakech to the serene landscapes of New
+    Zealand, Leslie and Johnny have traversed the globe, each adventure etching
+    a unique chapter in their travelogue.
+  </p>
 
-    <p class='mt-8'>
-      Welcome to the extraordinary journey of Leslie and Johnny, two passionate
-      wanderers with an insatiable appetite for exploration and a taste for the
-      extraordinary. As avid travelers, they have embarked on a global odyssey,
-      weaving through the vibrant tapestry of countries, cities, and cultures.
-      Their travel blog is not just a collection of destinations; it's a vivid
-      chronicle of experiences, a kaleidoscope of moments that have left an
-      indelible mark on their souls.
-    </p>
-    <p>
-      From the bustling markets of Marrakech to the serene landscapes of New
-      Zealand, Leslie and Johnny have traversed the globe, each adventure
-      etching a unique chapter in their travelogue.
-    </p>
+  <p>
+    But it's not just about the places; it's about the people. Leslie and Johnny
+    believe in the transformative power of connecting with locals, savoring not
+    just the flavors of exotic cuisines but the warmth of human stories.
+  </p>
+  <p>
+    And then there are the hidden gems—the hole-in-the-wall restaurants with
+    secret recipes handed down through generations, the tucked-away viewpoints
+    that offer panoramas few have witnessed. Leslie and Johnny are on a quest to
+    unearth these treasures, to go beyond the tourist brochures and offer you a
+    glimpse into the soul of a place.
+  </p>
 
-    <p>
-      But it's not just about the places; it's about the people. Leslie and
-      Johnny believe in the transformative power of connecting with locals,
-      savoring not just the flavors of exotic cuisines but the warmth of human
-      stories.
-    </p>
-    <p>
-      And then there are the hidden gems—the hole-in-the-wall restaurants with
-      secret recipes handed down through generations, the tucked-away viewpoints
-      that offer panoramas few have witnessed. Leslie and Johnny are on a quest
-      to unearth these treasures, to go beyond the tourist brochures and offer
-      you a glimpse into the soul of a place.
-    </p>
+  <div class='section transition:name={name} transition:animate="initial"' id='recent-posts'>
+    <h2 class="text-center">Recent Posts</h2>
+    <ul class='m-0 grid list-none grid-cols-2 gap-6 p-0'>
+      {
+        sortedPosts.map(
+          (post: any, index: number) =>
+            index < 4 && (
+              <li
+                class='md:col-span-1 mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 col-span-2 list-none'
+              >
+                <a
+                  href={`/blog/${post.slug}/`}
+                  class='block transition-colors duration-200 no-underline'
+                >
+                  <HeroImage
+                    class='mb-2 rounded-lg hover:shadow-md'
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    width={1536}
+                    height={768}
+                  />
+                  <BlogHeader
+                    pubDate={post.data.pubDate}
+                    name={`title-${post.data.title}`}
+                    isSubheading={true}
+                    class='text-xl m-0'
+                  >
+                    {post.data.title}
+                  </BlogHeader>
 
+                  <div class='m-0 text-base text-gray-600 '>
+                    {post.data.excerpt}
+                  </div>
+                </a>
+              </li>
+            )
+        )
+      }
+    </ul>
+  </div>
+  <div transition:name={name} transition:animate="initial">
+    <a href="/blog">
+      <h3 class="text-center text-2xl">All Posts</h3>
+    </a>
+  </div>
 </Layout>

@@ -3,10 +3,9 @@ import type { CollectionEntry } from 'astro:content';
 import Layout from './Layout.astro';
 import PostTitle from '../components/PostTitle.astro';
 import HeroImage from '../components/HeroImage.astro';
-import PostHeadline from '../components/PostHeadline.astro';
 import Prose from '../components/Prose.astro';
 import Gallery from '../components/Gallery.astro';
-
+import BlogHeader from '@components/BlogHeader.astro';
 
 
 type Props = CollectionEntry<'blog'>['data'];
@@ -29,22 +28,19 @@ const { title, description, pubDate, updatedDate, heroImage, galleryImages } =
       />
     )
   }
-  <PostHeadline pubDate={pubDate} updatedDate={updatedDate} headline={description} />
-  
+  <BlogHeader pubDate={pubDate} updatedDate={updatedDate} headline={description} />
 
   <hr />
-  
-    <Prose>
-      <slot />
-    </Prose>
- 
 
+  <Prose>
+    <slot />
+  </Prose>
 
-  <section class="gallery mt:12 md:mt-24">
-    {galleryImages && galleryImages.length > 0 && (
-      <Gallery images={galleryImages} />
-    )}
+  <section class='gallery mt:12 md:mt-24'>
+    {
+      galleryImages && galleryImages.length > 0 && (
+        <Gallery images={galleryImages} />
+      )
+    }
   </section>
 </Layout>
-
-

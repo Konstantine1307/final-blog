@@ -2,14 +2,10 @@
 import { ViewTransitions } from 'astro:transitions';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_DESCRIPTION } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Header from '../components/Header.astro';
 import Container from '../components/Container.astro';
 import ToTheTop from '../components/ToTheTop.astro';
-
-
-const prodEnv = import.meta.env.PROD;
-
 
 type Props = {
   title?: string;
@@ -19,14 +15,14 @@ type Props = {
 
 const {
   image,
+  title = SITE_TITLE,
   description = SITE_DESCRIPTION,
 } = Astro.props as Props;
-
 ---
 
 <html>
   <head>
-    <BaseHead title="Johnny and Leslie's blog" description={description} image={image} />
+    <BaseHead title={title} description={description} image={image} />
 
     <ViewTransitions />
     <style>
@@ -42,8 +38,10 @@ const {
     </style>
   </head>
 
-  <body  x-data="{ isShowing: false}"
-  @scroll.window = "isShowing = (window.pageYOffset > 100) ? true : false">
+  <body
+    x-data='{ isShowing: false}'
+    @scroll.window='isShowing = (window.pageYOffset > 100) ? true : false'
+  >
     <Header />
     <main>
       <Container class='max-w-screen-xl mx-auto pt-16 px-2 md:px-16 lg:px-20'>
@@ -54,5 +52,3 @@ const {
     <ToTheTop />
   </body>
 </html>
-
-

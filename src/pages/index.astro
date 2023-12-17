@@ -4,7 +4,8 @@ import { getCollection } from 'astro:content';
 import HeroImage from '../components/HeroImage.astro';
 import BlogHeader from '../components/BlogHeader.astro';
 
-import homeImage from '../content/assets/hero-images/lj-hollywood.webp';
+import homeImage from '@assets/hero-images/lj-hollywood.webp';
+import { SITE_DESCRIPTION, SITE_TITLE } from 'src/consts';
 
 type Props = {
 	name?: string;
@@ -18,8 +19,8 @@ const sortedPosts = (await getCollection('blog')).sort(
 ---
 
 <Layout
-  title='Our journeys'
-  description='Our journeys and experiences in our travels, stays and encounters.'
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
   pubDate={new Date('December 05 2022')}
   heroImage={homeImage}
 >

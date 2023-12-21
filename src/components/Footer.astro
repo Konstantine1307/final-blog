@@ -10,6 +10,7 @@ const today = new Date();
   <div class='internal-links mt-8 flex items-center justify-center space-x-4'>
     <HeaderLink href='/'>Home</HeaderLink>
     <HeaderLink href='/blog'>Blog</HeaderLink>
+    <HeaderLink href='/tags'>Tags</HeaderLink>
   </div>
   <div class='social-links'>
     <a href='https://www.facebook.com/TresowesGreenCottage/' target='_blank'>
@@ -52,15 +53,20 @@ const today = new Date();
         ></path></svg
       >
     </a>
+    <a href='mailto:info@tgcottage.com' target='_blank'>
+      <span class='sr-only'>Send email</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width=32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>
+    </a>
   </div>
 </footer>
 
 <style>
   footer {
-    padding: 2em 1em 6em 1em;
+    padding: 2em 1em 2em 1em;
     background: linear-gradient(var(--gray-gradient)) no-repeat;
     color: rgb(var(--gray));
     text-align: center;
+    margin-top: auto;
   }
   .social-links {
     display: flex;

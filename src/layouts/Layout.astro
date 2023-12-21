@@ -4,8 +4,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Header from '../components/Header.astro';
-import Container from '../components/Container.astro';
+
 import ToTheTop from '../components/ToTheTop.astro';
+import Main from '@components/Main.astro';
 
 type Props = {
   title?: string;
@@ -25,17 +26,6 @@ const {
     <BaseHead title={title} description={description} image={image} />
 
     <ViewTransitions />
-    <style>
-      main {
-        width: calc(100%);
-        max-width: 100%;
-        margin: 0;
-        padding: 3em 1em;
-      }
-      [x-cloak] {
-        display: none !important;
-      }
-    </style>
   </head>
 
   <body
@@ -43,11 +33,10 @@ const {
     @scroll.window='isShowing = (window.pageYOffset > 100) ? true : false'
   >
     <Header />
-    <main>
-      <Container class='max-w-screen-xl mx-auto pt-16 px-2 md:px-16 lg:px-20'>
-        <slot />
-      </Container>
-    </main>
+    <Main>
+      <slot />
+    </Main>
+
     <Footer />
     <ToTheTop />
   </body>

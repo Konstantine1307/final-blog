@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BlogHeader from './BlogHeader.astro';
+
+
+
+const sortedPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<div
+  class='section'
+  transition:animate='initial'
+  id='recent-posts'
+>
+  <h2 class='text-center'>Recent Posts</h2>
+  <ul class='m-0 grid list-none grid-cols-2 gap-6 p-0'>
+    {
+      sortedPosts.map(
+        (post: any, index: number) =>
+          index < 4 && (
+            <li class='col-span-2 md:col-span-1 mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-2 list-none hover:scale-105 transition-200'>
+              <a
+                href={`/blog/${post.slug}/`}
+                class='block transition-colors duration-200 no-underline'
+              >
+                <BlogHeader
+                  pubDate={post.data.pubDate}
+                  name={`title-${post.data.title}`}
+                  isSubheading={true}
+                  variant='recent'
+                >
+                  {post.data.title}
+                </BlogHeader>
+
+                <div class='m-0 text-base text-gray-600 '>
+                  {post.data.excerpt}
+                </div>
+              </a>
+            </li>
+          )
+      )
+    }
+  </ul>
+</div>
+<div transition:animate='slide'>
+  <a href='/blog'>
+    <h3 class='text-center text-2xl'>All Posts</h3>
+  </a>
+</div>

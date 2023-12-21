@@ -1,0 +1,23 @@
+---
+type props = {
+    variant: "chat" | "love" | "facts"
+}
+
+const { variant, ...props } = Astro.props
+
+const specialText = (variant: "chat" | "love" | "facts" ) => {
+    if (variant === "chat") {
+        return "before:content-['_💬_'] leading-5"
+    } else if ( variant === "love") {
+        return "before:content-['_❤️_'] leading-5"
+    } else if ( variant === "facts") {
+        return "before:content-['_✽_']"
+    }
+
+}
+
+---
+
+<p class={`pl-4 ${specialText(variant)}`}>
+    <slot />
+</p>

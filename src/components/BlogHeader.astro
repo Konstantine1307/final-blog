@@ -3,6 +3,7 @@ import FormattedDate from './FormattedDate.astro';
 
 type Props = {
   isSubheading?: boolean;
+  variant: "recent" | "blog",
   pubDate: Date;
   updatedDate?: Date;
   name?: string;
@@ -16,11 +17,20 @@ const {
   updatedDate,
   name,
   headline,
+  variant,
   ...props
 } = Astro.props;
+
+const previewCard = (variant: "recent" | "blog") => {
+  if (variant === "blog") {
+    return `flex flex-row w-full justify-between my-4 space-x-2`
+  } else if (variant === "recent") {
+    return `flex flex-col my-4`
+  }
+}
 ---
 
-<div transition:name={name} transition:animate='initial' class='flex flex-row w-full justify-between my-8 space-x-4 px-4'>
+<div transition:name={name} transition:animate='initial' class={`${previewCard(variant)}`}>
   {
     isSubheading ? (
       <>
@@ -33,7 +43,7 @@ const {
       </>
     ) : (
       <>
-        <div class='md:text-lg text-gray-700 italic basis-1/3'>
+        <div class='md:text-lg text-gray-700 italic'>
           <FormattedDate date={pubDate} />
           {updatedDate && (
             <div class='italic'>

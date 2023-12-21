@@ -10,7 +10,7 @@ import BlogHeader from '@components/BlogHeader.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, galleryImages } =
+const { title, description, pubDate, updatedDate, heroImage, galleryImages, tags } =
   Astro.props;
 ---
 
@@ -28,9 +28,18 @@ const { title, description, pubDate, updatedDate, heroImage, galleryImages } =
       />
     )
   }
-  <BlogHeader pubDate={pubDate} updatedDate={updatedDate} headline={description} />
+  <BlogHeader pubDate={pubDate} updatedDate={updatedDate} headline={description} variant='blog'/>
 
-  <hr />
+  <div class="prose prose-xl mx-auto bg-gradient-to-t from-neutral-50 to-indigo-50 p-4 mb-2">
+    <p class="text-lg italic">All the tags used in this post:</p>
+    <div class="tags pb-4">
+      {tags.map((tag) => (
+        <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
+      ))}
+    </div>
+  </div>
+
+  <div class="border border-b-1 box"></div>
 
   <Prose>
     <slot />
@@ -44,3 +53,11 @@ const { title, description, pubDate, updatedDate, heroImage, galleryImages } =
     }
   </section>
 </Layout>
+
+<style>
+ .box {
+  box-shadow: 0 2px 8px rgba(var(--black), 5%);
+ }
+</style>
+
+

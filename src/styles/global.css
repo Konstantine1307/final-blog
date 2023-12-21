@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 :root {
 	--black: 15, 18, 25;
@@ -8,6 +12,14 @@
 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
 }
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+  }
+  
+
 
 .sr-only {
 	border: 0;
@@ -25,4 +37,16 @@
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+.tags {
+	@apply flex flex-wrap mx-auto w-full max-w-3xl;
+}
+
+.tag {
+	@apply text-xl text-gray-700 m-3 hover:scale-105 hover:transition-all;
+}
+
+.tag a {
+	@apply underline underline-offset-4 decoration-wavy decoration-slate-400 hover:text-purple-800 hover:decoration-slate-700;
 }

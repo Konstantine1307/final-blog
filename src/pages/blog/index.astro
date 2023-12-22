@@ -1,70 +1,19 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import BlogHeader from '../../components/BlogHeader.astro';
-import HeroImage from '../../components/HeroImage.astro';
-import PostTitle from '../../components/PostTitle.astro';
+import { SITE } from "src/consts";
+import { getCollection } from "astro:content";
+import getPageNumbers from "src/utils/getPageNumber";
+import getSortedPosts from "src/utils/getSortedPosts";
+import Posts from "@layouts/Posts.astro";
 
-
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
-
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const sortedPosts = getSortedPosts(posts);
+const totalPages = getPageNumbers(sortedPosts.length);
+const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
 ---
 
-<Layout title='Travel Blog'>
-  <PostTitle>Johnny & Leslie Blog</PostTitle>
-  <p class="text-lg md:text-xl lg:text-end lg:pr-5">Follow our adventures, places and people we have visited and met in our trips.</p>
-  <p class="my-8 text-xl font-bold">OUR LATEST POST  😀 :</p>
-  <ul class='m-0 grid list-none grid-cols-2 gap-6 p-0'>
-    {
-      posts.map((post: any, index: number) => (
-        <li
-          class={`${
-            index === 0
-              ? 'mb-4 text-center'
-              : 'md:col-span-1 mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 hover:scale-105 hover:transition-all'
-          } col-span-2 list-none `}
-        >
-          <a
-            href={`/blog/${post.slug}/`}
-            class='block transition-colors duration-200'
-          >
-            <HeroImage
-              class={`${
-                index === 0 ? 'mx-auto' : ''
-              } mb-2 rounded-lg hover:shadow-md`}
-              src={post.data.heroImage}
-              alt={post.data.title}
-              width={1536}
-              height={768}
-            />
-            <BlogHeader
-              pubDate={post.data.pubDate}
-              name={`title-${post.data.title}`}
-              isSubheading={true}
-              class={`${
-                index === 0
-                  ? 'md:text-2xl lg:text-3xl mb-2'
-                  : 'underline underline-offset-2 '
-              } text-xl m-0`}
-              variant="blog"
-            >
-              {post.data.title}
-            </BlogHeader>
-
-            <div
-              class={`${
-                index === 0
-                  ? 'md:text-lg border-b-2 pb-6 border-b-gray-100 md:px-12 mb-5'
-                  : ''
-              } m-0 text-base text-gray-600`}
-            >
-              {post.data.excerpt}
-            </div>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</Layout>
+<Posts
+    posts={paginatedPosts}
+    pageNum={1}
+    totalPages={totalPages.length}
+    title="Blogs"
+/>

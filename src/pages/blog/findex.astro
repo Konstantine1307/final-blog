@@ -1,0 +1,158 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import BlogHeader from '../../components/BlogHeader.astro';
+import HeroImage from '../../components/HeroImage.astro';
+import PostTitle from '../../components/PostTitle.astro';
+import getSortedPosts from 'src/utils/getSortedPosts';
+import { SITE } from 'src/consts';
+import getPageNumbers from "../../utils/getPageNumber";
+
+
+
+// const posts = (await getCollection('blog')).sort(
+//   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+// );
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const sortedPosts = getSortedPosts(posts);
+const totalPages = getPageNumbers(sortedPosts.length);
+const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
+
+export interface Props {
+    pageNum: number;
+    totalPages: number;
+    title: string;
+}
+
+const { pageNum,  title = "Blogs" } = Astro.props;
+
+const prev = pageNum > 1 ? "" : "disabled";
+const next = pageNum < totalPages.length ? "" : "disabled";
+
+// Remove current url path and remove trailing slash if exists
+const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
+
+// Get url array from path
+// eg: /tags/tailwindcss => ['tags', 'tailwindcss']
+const breadcrumbList = currentUrlPath.split("/").slice(1);
+
+---
+
+<Layout title='Travel Blog'>
+  <PostTitle>Johnny & Leslie Blog</PostTitle>
+  <p class="text-lg md:text-xl lg:text-end lg:pr-5">Follow our adventures, places and people we have visited and met in our trips.</p>
+  <a
+  href="/"
+  class="font-medium flex no-underline text-neutral-500 mb-8"
+>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="M224 128a8 8 0 0 1-8 8H59.31l58.35 58.34a8 8 0 0 1-11.32 11.32l-72-72a8 8 0 0 1 0-11.32l72-72a8 8 0 0 1 11.32 11.32L59.31 120H216a8 8 0 0 1 8 8"/></svg>
+  Back to home
+</a>
+{
+  breadcrumbList.map((breadcrumb, index) =>
+      index + 1 === breadcrumbList.length ? (
+          <h2 class="font-medium text-h4 text-neutral-500 my-4 leading-8 tracking-tighter">
+              {breadcrumbList[0] === "blog" && "Blogs"}
+              <span class="ml-2 opacity-70 text-xl">
+                  {breadcrumbList[0] === "blog" &&
+                      `(Page ${breadcrumbList[0 + 1] || 1})`}
+              </span>
+          </h2>
+      ) : (
+          ""
+      )
+  )
+}
+  <p class="my-8 text-xl font-bold">OUR LATEST POST  😀 :</p>
+  <ul class='m-0 grid list-none grid-cols-2 gap-6 p-0'>
+    {
+      sortedPosts.map((post: any, index: number) => (
+        <li
+          class={`${
+            index === 0
+              ? 'mb-4 text-center'
+              : 'md:col-span-1 mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 hover:scale-105 hover:transition-all'
+          } col-span-2 list-none `}
+        >
+          <a
+            href={`/blog/${post.slug}/`}
+            class='block transition-colors duration-200'
+          >
+            <HeroImage
+              class={`${
+                index === 0 ? 'mx-auto' : ''
+              } mb-2 rounded-lg hover:shadow-md`}
+              src={post.data.heroImage}
+              alt={post.data.title}
+              width={1536}
+              height={768}
+            />
+            <BlogHeader
+              pubDate={post.data.pubDate}
+              name={`title-${post.data.title}`}
+              isSubheading={true}
+              class={`${
+                index === 0
+                  ? 'md:text-2xl lg:text-3xl mb-2'
+                  : 'underline underline-offset-2 '
+              } text-xl m-0`}
+              variant="blog"
+            >
+              {post.data.title}
+            </BlogHeader>
+
+            <div
+              class={`${
+                index === 0
+                  ? 'md:text-lg border-b-2 pb-6 border-b-gray-100 md:px-12 mb-5'
+                  : ''
+              } m-0 text-base text-gray-600`}
+            >
+              {post.data.excerpt}
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    totalPages.length > 1 && (
+        <nav
+            class="pagination--container flex flex-wrap mx-auto justify-center mt-8 text-neutral-500"
+            aria-label="Pagination"
+        >
+            <a
+                tabindex={prev === "disabled" ? "-1" : "0"}
+                href={`/blog${
+                    pageNum - 1 !== 1 ? "/" + (pageNum - 1) : "/"
+                }`}
+                class={`mr-4 select-none flex flex-wrap ${
+                    prev === "disabled"
+                        ? "disabled select-none pointer-events-none opacity-70"
+                        : ""
+                }`}
+                aria-label="Previous"
+                aria-disabled={prev === "disabled"}
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="M224 128a8 8 0 0 1-8 8H59.31l58.35 58.34a8 8 0 0 1-11.32 11.32l-72-72a8 8 0 0 1 0-11.32l72-72a8 8 0 0 1 11.32 11.32L59.31 120H216a8 8 0 0 1 8 8"/></svg>
+                Prev
+            </a>
+            <a
+                tabindex={next === "disabled" ? "-1" : "0"}
+                href={`/blog/${pageNum + 1}`}
+                class={`ml-4 select-none flex flex-wrap ${
+                    next === "disabled"
+                        ? "disabled select-none pointer-events-none opacity-70"
+                        : ""
+                }`}
+                aria-label="Next"
+                aria-disabled={next === "disabled"}
+            >
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="M224 128a8 8 0 0 1-8 8H59.31l58.35 58.34a8 8 0 0 1-11.32 11.32l-72-72a8 8 0 0 1 0-11.32l72-72a8 8 0 0 1 11.32 11.32L59.31 120H216a8 8 0 0 1 8 8"/></svg>
+            </a>
+        </nav>
+    )
+}
+</Layout>

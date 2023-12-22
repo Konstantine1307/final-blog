@@ -7,6 +7,6 @@ import alpinejs from "@astrojs/alpinejs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://final-blog-nine.vercel.app/',
   integrations: [mdx(), sitemap(), tailwind(), alpinejs()]
 });

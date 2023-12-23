@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BlogHeader from './BlogHeader.astro';
 import HeroImage from './HeroImage.astro';
+import PostTitle from './PostTitle.astro';
 
 const sortedPosts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -9,26 +10,37 @@ const sortedPosts = (await getCollection('blog')).sort(
 ---
 
 <div class='section' transition:animate='initial' id='recent-posts'>
+  <PostTitle className='mt-8'>Blog</PostTitle>
+  <div class='flex flex-row my-4 items-center text-neutral-500'>
+    <a href='/blog' class='font-medium flex no-underline ml-auto mb-8'>
+      <span class='mr-2'>View all posts</span>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='24'
+        height='24'
+        viewBox='0 0 256 256'
+        ><path
+          fill='currentColor'
+          d='m220.24 132.24l-72 72a6 6 0 0 1-8.48-8.48L201.51 134H40a6 6 0 0 1 0-12h161.51l-61.75-61.76a6 6 0 0 1 8.48-8.48l72 72a6 6 0 0 1 0 8.48'
+        ></path></svg
+      >
+    </a>
+  </div>
+
   <ul class='m-0 grid list-none grid-cols-2 gap-6 p-0'>
     {
       sortedPosts.map(
         (post: any, index: number) =>
-          index < 1 && (
+          index < 4 && (
             <li
-              class={`${
-                index === 0
-                  ? 'mb-4 text-center'
-                  : 'md:col-span-1 mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 hover:scale-105 hover:transition-all'
-              } col-span-2 list-none `}
+              class={`${'md:col-span-1 mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 hover:scale-105 hover:transition-all'} col-span-2 list-none `}
             >
               <a
                 href={`/blog/${post.slug}/`}
                 class='block transition-colors duration-200 no-underline'
               >
                 <HeroImage
-                  class={`${
-                    index === 0 ? 'mx-auto' : ''
-                  } mb-2 rounded-lg hover:shadow-md`}
+                  class={`${''} mb-2 rounded-lg hover:shadow-md`}
                   src={post.data.heroImage}
                   alt={post.data.title}
                   width={1536}
@@ -43,7 +55,7 @@ const sortedPosts = (await getCollection('blog')).sort(
                   {post.data.title}
                 </BlogHeader>
 
-                <div class='m-0 text-base text-gray-600 '>
+                <div class='m-0 text-base text-gray-600 mb-2 '>
                   {post.data.excerpt}
                 </div>
               </a>
@@ -52,5 +64,4 @@ const sortedPosts = (await getCollection('blog')).sort(
       )
     }
   </ul>
-  <hr  class="mb-10"/>
 </div>

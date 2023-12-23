@@ -14,5 +14,5 @@ export const SITE: Site = {
     ogImage: "images/astro-lane.png",
     keywords:
         "Personal portfolio, landing page, page template, developer portfoliom designer portfolio",
-    postPerPage: 3
+    postPerPage: 4
 };

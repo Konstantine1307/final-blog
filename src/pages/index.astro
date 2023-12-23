@@ -1,29 +1,46 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import HeroImage from '../components/HeroImage.astro';
 import homeImage from '@assets/hero-images/palm-beach.webp';
 import { SITE_DESCRIPTION, SITE_TITLE } from 'src/consts';
 import PostTitle from '@components/PostTitle.astro';
-import RecentPosts from '@components/RecentPosts.astro';
+import LatestPosts from '@components/LatestPosts.astro';
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <section class='max-w-5xl'>
-    <PostTitle>Johnny & Leslie
-     
-    </PostTitle>
-    <p class='text-lg md:text-xl lg:pr-5'>
+  
+  <section class='max-w-4xl'>
+    <PostTitle>Johnny & Leslie</PostTitle>
+    <p class='text-lg md:text-xl lg:pr-5 mb-8 text-gray-700'>
       Follow our adventures, places and people we have visited and met in our
       trips.
     </p>
-    <p class='my-8 text-xl font-bold uppercase'>Some details about us 😀 :</p>
 
-    <HeroImage class='rounded-lg' src={homeImage} alt={SITE_TITLE} />
-
+    <div class='flex gap-4 rounded-xl'>
+      <div class="mx-auto md:basis-1/2">
+        <Image
+          src={homeImage}
+          alt="Leslie and Johnny relaxing in Palm Beach, Waihiki Island"
+          width={500}
+          height={250}
+          class="rounded-xl"
+        />
+      </div>
+      <div class='hidden md:flex mx-auto text-lg text-gray-700 items-center basis-1/2' >
+        <p>
+          Welcome to the extraordinary journey of Leslie and Johnny, two
+          passionate wanderers with an insatiable appetite for exploration and a
+          taste for the extraordinary, through the vibrant tapestry of countries,
+          cities, and cultures.
+        </p>
+      </div>
+    </div>
+    
     <div
-      class='max-w-3xl mx-auto my-8 text-lg text-gray-700 flex flex-col space-y-3'
+      class='mx-auto my-8 text-lg text-gray-700 flex flex-col space-y-3 '
     >
-      <p class='mt-8'>
+      <p class='mt-8 md:hidden'>
         Welcome to the extraordinary journey of Leslie and Johnny, two
         passionate wanderers with an insatiable appetite for exploration and a
         taste for the extraordinary, through the vibrant tapestry of countries,
@@ -40,11 +57,9 @@ import RecentPosts from '@components/RecentPosts.astro';
         the transformative power of connecting with locals, savoring not just
         the flavors of exotic cuisines but the warmth of human stories.
       </p>
-   
-
-    <RecentPosts name={SITE_TITLE} />
-    </div>
+</div>
+      <div class='border border-b-1'></div>
+      <LatestPosts name={SITE_TITLE} />
+  
   </section>
 </Layout>
-
-

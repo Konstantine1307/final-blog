@@ -6,14 +6,14 @@ export interface Props {
 const { className } = Astro.props;
 ---
 
-<section class='max-w-screen-2xl mx-auto flex justify-between'>
+<section class=`max-w-screen-2xl ${className}`>
   <h1
-    class='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-left text-emerald-900 basis-2/3'
+    class='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:leading-none mb-10 text-emerald-900'
   >
     <slot />
     <a
       href='/rss.xml'
-      class='rss-link inline-block text-pink-300'
+      class='rss-link inline-block'
       aria-label='rss feed'
       title='RSS Feed'
     >
@@ -26,17 +26,10 @@ const { className } = Astro.props;
       </svg>
     </a>
   </h1>
-
-  <a
-    href='mailto:info@tgcottage.com'
-    class='text-base md:text-2xl font-semibold underline underline-offset-4 md:mr-8'
-  >
-    Email us
-  </a>
 </section>
 
 <style>
   .rss-icon {
-    @apply ml-2  h-6 w-6 scale-110  sm:scale-125 ;
+    @apply ml-2  h-6 w-6 scale-110  sm:scale-125;
   }
 </style>

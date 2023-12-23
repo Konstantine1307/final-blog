@@ -1,17 +1,19 @@
 ---
 type props = {
-    variant: "chat" | "love" | "facts"
+    variant: "chat" | "love" | "facts" | "caption"
 }
 
 const { variant, ...props } = Astro.props
 
-const specialText = (variant: "chat" | "love" | "facts" ) => {
+const specialText = (variant: "chat" | "love" | "facts" | "caption") => {
     if (variant === "chat") {
         return "before:content-['_💬_'] leading-5"
     } else if ( variant === "love") {
         return "before:content-['_❤️_'] leading-5"
     } else if ( variant === "facts") {
         return "before:content-['_✽_']"
+    } else if ( variant === "caption") {
+        return "text-gray-600 text-sm pl-2 italic -mt-8"
     }
 
 }

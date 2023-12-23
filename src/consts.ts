@@ -7,12 +7,12 @@ export const SITE_TITLE: string = "Johnny & Leslie Blog";
 export const SITE_DESCRIPTION: string = 'Our journeys and experiences in our travels, stays and encounters.';
 
 export const SITE: Site = {
-    siteUrl: "https://final-blog-nine.vercel.app/", // Always put "/" at the end of the URL
+    siteUrl: "https://johnnyleslie.com/", // Always put "/" at the end of the URL
     author: "johnnyleslie",
     desc: "A personal portfolio landing template for developers and designers.",
     title: "Travel Blog",
-    ogImage: "images/astro-lane.png",
+    ogImage: "/intertravel.png",
     keywords:
-        "Personal portfolio, landing page, page template, developer portfoliom designer portfolio",
+        "Personal site, landing page, blog, travel blog",
     postPerPage: 4
 };

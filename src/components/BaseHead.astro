@@ -9,7 +9,6 @@ interface Props {
 	description: string;
 	author: string;
 	image?: string;
-	
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -29,9 +28,8 @@ const { title, description, image = '/lj-hollywood.jpeg', author = SITE.author }
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title ?? SITE.title} />
-<meta name="description" content={description ? description : SITE.description} />
-<meta name="keywords" content={SITE.keywords} />
+<meta name="title" content={title} />
+<meta name="description" content={description} />
 <meta name="author" content={author} />
 
 <!-- Open Graph / Facebook -->

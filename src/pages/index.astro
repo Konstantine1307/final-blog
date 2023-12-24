@@ -9,7 +9,6 @@ import LatestPosts from '@components/LatestPosts.astro';
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  
   <section class='max-w-4xl'>
     <PostTitle>Johnny & Leslie</PostTitle>
     <p class='text-lg md:text-xl lg:pr-5 mb-8 text-gray-700'>
@@ -18,48 +17,59 @@ import LatestPosts from '@components/LatestPosts.astro';
     </p>
 
     <div class='flex gap-4 rounded-xl'>
-      <div class="mx-auto md:basis-1/2">
+      <div class='mx-auto md:basis-1/2'>
         <Image
           src={homeImage}
-          alt="Leslie and Johnny relaxing in Palm Beach, Waihiki Island"
+          alt='Leslie and Johnny relaxing in Palm Beach, Waihiki Island'
           width={500}
           height={250}
-          class="rounded-xl"
+          class='rounded-xl'
         />
       </div>
-      <div class='hidden md:flex mx-auto text-lg text-gray-700 items-center basis-1/2' >
+      <div
+        class='hidden md:flex mx-auto text-base text-gray-700 items-center basis-1/2'
+      >
         <p>
-          Welcome to the extraordinary journey of Leslie and Johnny, two
-          passionate wanderers with an insatiable appetite for exploration and a
-          taste for the extraordinary, through the vibrant tapestry of countries,
-          cities, and cultures.
+          Step into our world, where Leslie and Johnny, two avid explorers with
+          an unquenchable thirst for discovery and a penchant for the
+          extraordinary, invite you to join their incredible journey. We've
+          crisscrossed the United States, Mexico, the Dominican Republic,
+          Canada, all of Europe, the Canary Islands, the Balearic Islands,
+          Greece, Singapore, Thailand, New Zealand, Australia, and beyond –
+          collecting memories that span continents and cultures.
         </p>
       </div>
     </div>
-    
-    <div
-      class='mx-auto my-8 text-lg text-gray-700 flex flex-col space-y-3 '
-    >
+
+    <div class='mx-auto my-8 text-lg text-gray-700 flex flex-col space-y-3'>
       <p class='mt-8 md:hidden'>
-        Welcome to the extraordinary journey of Leslie and Johnny, two
-        passionate wanderers with an insatiable appetite for exploration and a
-        taste for the extraordinary, through the vibrant tapestry of countries,
-        cities, and cultures.
+        Step into our world, where Leslie and Johnny, two avid explorers with an
+        unquenchable thirst for discovery and a penchant for the extraordinary,
+        invite you to join their incredible journey. We've crisscrossed the
+        United States, Mexico, the Dominican Republic, Canada, all of Europe,
+        the Canary Islands, the Balearic Islands, Greece, Singapore, Thailand,
+        New Zealand, Australia, and beyond – collecting memories that span
+        continents and cultures.
       </p>
       <p>
-        From the bustling markets of Marrakech to the serene landscapes of New
-        Zealand, we have traversed the globe, each adventure etching a unique
-        chapter in their travelogue.
+        From the lively markets of Marrakech to the tranquil landscapes of New
+        Zealand, our adventures have woven a rich tapestry of experiences across
+        the globe. Each destination leaves its mark, contributing a distinct
+        chapter to the evolving story of our travels.
       </p>
 
       <p>
-        But it's not just about the places; it's about the people. We believe in
-        the transformative power of connecting with locals, savoring not just
-        the flavors of exotic cuisines but the warmth of human stories.
+        Yet, for us, it's more than just ticking off places on a map. It's about
+        the people we meet along the way. We wholeheartedly believe in the
+        transformative power of connecting with locals, immersing ourselves not
+        only in the flavors of exotic cuisines but also in the warmth of human
+        stories. So, come along as we share the moments, the encounters, and the
+        profound connections that make our journey uniquely ours. Welcome to the
+        intimate world of Leslie and Johnny, where every adventure is a
+        celebration of the extraordinary – both in places and in people.
       </p>
-</div>
-      <div class='border border-b-1'></div>
-      <LatestPosts name={SITE_TITLE} />
-  
+    </div>
+    <div class='border border-b-1'></div>
+    <LatestPosts name={SITE_TITLE} />
   </section>
 </Layout>

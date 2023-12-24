@@ -2,18 +2,16 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-import { SITE } from 'src/consts';
 
 interface Props {
 	title: string;
 	description: string;
-	author: string;
 	image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/lj-hollywood.jpeg', author = SITE.author } = Astro.props;
+const { title, description, image = '/lj-hollywood.jpeg' } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -30,7 +28,6 @@ const { title, description, image = '/lj-hollywood.jpeg', author = SITE.author }
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<meta name="author" content={author} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
@@ -40,7 +37,7 @@ const { title, description, image = '/lj-hollywood.jpeg', author = SITE.author }
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="/johnnyleslie.png" />
+<meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />

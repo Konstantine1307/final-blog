@@ -8,9 +8,7 @@ export const SITE_DESCRIPTION: string = 'Our journeys and experiences in our tra
 
 export const SITE: Site = {
     siteUrl: "https://www.johnnyleslie.com/", // Always put "/" at the end of the URL
-    author: "johnnyleslie",
-    description:  SITE_DESCRIPTION,
-    title: SITE_TITLE,
+    title: "Johnny & Leslie Blog",
     ogImage: "/johnnyleslie.png",
     keywords:
         "Personal site, landing page, blog, travel blog",

@@ -7,6 +7,6 @@ import alpinejs from "@astrojs/alpinejs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://johnnyleslie.com/',
+  site: 'https://www.johnnyleslie.com',
   integrations: [mdx(), sitemap(), tailwind(), alpinejs()]
 });

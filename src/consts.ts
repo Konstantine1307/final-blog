@@ -7,11 +7,11 @@ export const SITE_TITLE: string = "Johnny & Leslie Blog";
 export const SITE_DESCRIPTION: string = 'Our journeys and experiences in our travels, stays and encounters.';
 
 export const SITE: Site = {
-    siteUrl: "https://johnnyleslie.com/", // Always put "/" at the end of the URL
+    siteUrl: "https://www.johnnyleslie.com/", // Always put "/" at the end of the URL
     author: "johnnyleslie",
-    desc: "A personal portfolio landing template for developers and designers.",
-    title: "Travel Blog",
-    ogImage: "/intertravel.png",
+    description:  SITE_DESCRIPTION,
+    title: SITE_TITLE,
+    ogImage: "/johnnyleslie.png",
     keywords:
         "Personal site, landing page, blog, travel blog",
     postPerPage: 4

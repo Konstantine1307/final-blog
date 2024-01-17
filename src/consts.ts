@@ -12,5 +12,5 @@ export const SITE: Site = {
     ogImage: "/johnnyleslie.png",
     keywords:
         "Personal site, landing page, blog, travel blog",
-    postPerPage: 4
+    postPerPage: 6
 };

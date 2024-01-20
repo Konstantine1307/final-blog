@@ -1,29 +1,21 @@
+// tina/config.ts
 import { defineConfig } from "tinacms";
-
-// Your hosting provider likely exposes this as an environment variable
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
-
-export default defineConfig({
+var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
+var config_default = defineConfig({
   branch: "main",
-
   // Get this from tina.io
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   // Get this from tina.io
   token: process.env.TINA_TOKEN,
-
   build: {
     outputFolder: "admin",
-    publicFolder: "public",
+    publicFolder: "public"
   },
   media: {
     tina: {
       mediaRoot: "src",
-      publicFolder: "",
-    },
+      publicFolder: ""
+    }
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
@@ -39,37 +31,37 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "description",
             label: "Description",
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "slug",
             label: "Slug",
-            required: false,
+            required: false
           },
           {
             type: "datetime",
             name: "pubDate",
             label: "Date Posted",
-            required: true,
+            required: true
           },
           {
             type: "image",
             name: "heroImage",
             label: "Hero Image",
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "excerpt",
             label: "Excerpt",
-            required: true,
+            required: true
           },
           {
             type: "string",
@@ -99,7 +91,7 @@ export default defineConfig({
               "adventure",
               "relaxation",
               "singapore",
-              "issues",
+              "issues"
             ]
           },
           {
@@ -111,13 +103,13 @@ export default defineConfig({
               {
                 type: "image",
                 name: "src",
-                label: "Image Src",
+                label: "Image Src"
               },
-              { 
+              {
                 type: "string",
                 name: "caption",
-                label: "Image Caption",
-              },
+                label: "Image Caption"
+              }
             ]
           },
           {
@@ -137,30 +129,33 @@ export default defineConfig({
                     options: [
                       "facts",
                       "chat",
-                      "love", 
-                      "caption",
+                      "love",
+                      "caption"
                     ]
                   },
                   {
                     name: "children",
                     label: "Text",
                     type: "string"
-                  },
-                ],
+                  }
+                ]
               },
               {
                 name: "ImageText",
                 label: "Image Text",
                 fields: [
-                  { name: "src",
+                  {
+                    name: "src",
                     label: "Image src",
                     type: "image"
                   },
-                  { name: "alt",
+                  {
+                    name: "alt",
                     label: "Image alt",
                     type: "string"
                   },
-                  { name: "caption",
+                  {
+                    name: "caption",
                     label: "Image caption",
                     type: "string",
                     ui: {
@@ -173,29 +168,35 @@ export default defineConfig({
                 name: "SideBySideImages",
                 label: "Side by Side Images",
                 fields: [
-                  { name: "src",
+                  {
+                    name: "src",
                     label: "Image src",
-                    type: "image",
+                    type: "image"
                   },
-                  { name: "alt",
+                  {
+                    name: "alt",
                     label: "Image alt",
                     type: "string"
                   },
-                  { name: "src2",
+                  {
+                    name: "src2",
                     label: "Image src2",
-                    type: "image",
+                    type: "image"
                   },
-                  { name: "alt2",
+                  {
+                    name: "alt2",
                     label: "Image alt2",
                     type: "string"
-                  },
-
+                  }
                 ]
               }
             ]
-          },
-        ],
-      },
-    ],
-  },
+          }
+        ]
+      }
+    ]
+  }
 });
+export {
+  config_default as default
+};

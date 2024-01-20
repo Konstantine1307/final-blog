@@ -1,0 +1,16 @@
+fragment PostParts on Post {
+  __typename
+  title
+  description
+  slug
+  pubDate
+  heroImage
+  excerpt
+  tags
+  galleryImages {
+    __typename
+    src
+    caption
+  }
+  body
+}

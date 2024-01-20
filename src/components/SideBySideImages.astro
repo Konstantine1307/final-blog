@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+
+
+type Props = {
+	src: any;
+	alt: string;
+	src2: any;
+	alt2: any;
+	[key: string]: any;
+};
+
+const { src, alt, src2, alt2, ...props } = Astro.props;
+---
+<section class="flex flex-row items-center justify-center  w-full gap-1 md:gap-3">
+<div class="">
+    <Image src={src} alt={alt} width={330} height={250} {...props} transition:name={alt} transition:animate="initial"/>
+</div>
+<div class="">
+    <Image src={src2} alt={alt2} width={330} height={250} {...props} transition:name={alt2} transition:animate="initial"/>
+</div>
+</section>

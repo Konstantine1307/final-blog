@@ -6,6 +6,9 @@ import HeroImage from '../components/HeroImage.astro';
 import Prose from '../components/Prose.astro';
 import Gallery from '../components/Gallery.astro';
 import BlogHeader from '@components/BlogHeader.astro';
+import SpecialText from '@components/SpecialText.astro';
+import ImageText from '@components/ImageText.astro'
+import SideBySideImages from '@components/SideBySideImages.astro';
 
 
 export interface Props {
@@ -54,7 +57,7 @@ const { Content } = await post.render();
   <div class="border border-b-1 "></div>
 
   <Prose>
-    <Content />
+    <Content components={{SpecialText, ImageText, SideBySideImages}} />
   </Prose>
 
   <section class='gallery mt:12 md:mt-24'>
